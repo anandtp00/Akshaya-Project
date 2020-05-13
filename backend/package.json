@@ -1,0 +1,19 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "node bakend for money management",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anandtp00/Akshaya-Project.git"
+  },
+  "author": "Anand T P",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anandtp00/Akshaya-Project/issues"
+  },
+  "homepage": "https://github.com/anandtp00/Akshaya-Project#readme"
+}
