@@ -8,26 +8,18 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 const routes: Routes = [
-    {
-        path: 'income',
-        component: IncomeComponent
+    { path: 'income', component: IncomeComponent
     },
-    {
-        path: 'expense',
-        component: ExpenseComponent
+    { path: 'expense',component: ExpenseComponent
     },
-    {
-        path: 'statement',
-        component: StatementComponent
+    { path: 'statement',component: StatementComponent
     },
-    {
-        path: 'dashboard',
-        component: DashboardComponent
-    }
+    { path: 'dashboard',component: DashboardComponent
+ }
 ];
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class LayoutRoutingModule { }

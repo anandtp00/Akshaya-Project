@@ -3,10 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponentComponent } from './layout-component/layout-component.component';
 
 
+
 const routes: Routes = [
   {
-    path:'admin',
-    component:LayoutComponentComponent
+    path: 'admin',
+    component: LayoutComponentComponent,
   }
 ];
 
