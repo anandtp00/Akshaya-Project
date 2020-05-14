@@ -1,0 +1,11 @@
+.space{
+    margin: auto;
+    align-items: auto;
+    padding: inherit;
+    margin: 0 0 0 45px;
+    line-height: 30px;
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #fff;
+}

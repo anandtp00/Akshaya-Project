@@ -65,12 +65,13 @@
 .sidebar .nav > li.active-pro{
     position: absolute;
     width: 100%;
-    bottom: 10px;
+    bottom: 50px;
 }
 .sidebar .nav > li.active-pro a{
-    background: rgba(255, 255, 255, 0.14);
-    opacity: 1;
+    /* background: rgba(255, 255, 255, 0.14);
+    opacity: 1; */
     color: #FFFFFF;
+    display: block;
 }
 
 .table-upgrade td:nth-child(2),
