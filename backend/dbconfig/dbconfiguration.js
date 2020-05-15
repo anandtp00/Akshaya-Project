@@ -4,6 +4,7 @@ const user=process.env.mongoUser;
 const pass=process.env.mongoPass;
 const url= user+':'+pass;
 
+//mongodb cluster connection url
 mongoose.connect('mongodb+srv://'+url+'@akshayahrm-nw0kb.mongodb.net/akshayaHRM?retryWrites=true&w=majority',{ useNewUrlParser: true },(error)=>{
     if(!error){
         console.log('MongoDB connection achieved');
