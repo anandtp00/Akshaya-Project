@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-
+//schema creation with required fields
 var IncomeSchema = mongoose.Schema({
     company: { type: String, required: true },
     service: { type: String, required: true },
