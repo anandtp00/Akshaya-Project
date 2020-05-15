@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { AppComponent } from './app.component';
 import { AdminComponentComponent } from './admin-component/admin-component.component';
 
@@ -12,6 +14,10 @@ import { ExpenseComponent } from './layout-component/expense/expense.component';
 import { DashboardComponent } from './layout-component/dashboard/dashboard.component';
 import { IncomeComponent } from './layout-component/income/income.component';
 import { StatementComponent } from './layout-component/statement/statement.component';
+
+
+
+
 
 
 @NgModule({
@@ -28,7 +34,9 @@ import { StatementComponent } from './layout-component/statement/statement.compo
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    BsDatepickerModule.forRoot()
 
   ],
   providers: [],
