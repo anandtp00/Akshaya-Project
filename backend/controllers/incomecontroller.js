@@ -1,6 +1,6 @@
 
 
-
+//calling the required schema
 const Income = require('../models/incomemodel');
 
 
