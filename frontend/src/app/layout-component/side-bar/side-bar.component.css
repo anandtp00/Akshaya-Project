@@ -9,3 +9,7 @@
     text-transform: uppercase;
     color: #fff;
 }
+
+.logo a{
+    text-align: center;
+}
