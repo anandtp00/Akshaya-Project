@@ -8,9 +8,11 @@ import { AdminComponentComponent } from './admin-component/admin-component.compo
 import { LayoutComponentComponent } from './layout-component/layout-component.component';
 import { SideBarComponent } from './layout-component/side-bar/side-bar.component';
 import { NavBarComponent } from './layout-component/nav-bar/nav-bar.component';
-import { IncomeComponent } from './layout-component/income/income.component';
 import { ExpenseComponent } from './layout-component/expense/expense.component';
+import { DashboardComponent } from './layout-component/dashboard/dashboard.component';
+import { IncomeComponent } from './layout-component/income/income.component';
 import { StatementComponent } from './layout-component/statement/statement.component';
+
 
 @NgModule({
   declarations: [
@@ -19,13 +21,15 @@ import { StatementComponent } from './layout-component/statement/statement.compo
     LayoutComponentComponent,
     SideBarComponent,
     NavBarComponent,
+    StatementComponent,
     IncomeComponent,
-    ExpenseComponent,
-    StatementComponent
+    DashboardComponent,
+    ExpenseComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
