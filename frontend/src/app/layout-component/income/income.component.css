@@ -5,3 +5,12 @@
 .dateshow{
     text-align: right;
 }
+
+input.ng-invalid.ng-dirty{
+    box-shadow: 0 1px 0 0 #e91e63 !important
+}
+
+.disable{
+    pointer-events:none;
+    box-shadow: slategray;
+}

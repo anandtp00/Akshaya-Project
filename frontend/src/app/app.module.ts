@@ -14,6 +14,8 @@ import { ExpenseComponent } from './layout-component/expense/expense.component';
 import { DashboardComponent } from './layout-component/dashboard/dashboard.component';
 import { IncomeComponent } from './layout-component/income/income.component';
 import { StatementComponent } from './layout-component/statement/statement.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -36,7 +38,9 @@ import { StatementComponent } from './layout-component/statement/statement.compo
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    FormsModule,
+    HttpClientModule
 
   ],
   providers: [],
