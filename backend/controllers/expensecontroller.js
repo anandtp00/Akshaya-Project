@@ -7,7 +7,7 @@ const Statement = require('../models/statementmodel');
 
 
 module.exports = {
-    addexpense: async (request, response) => {
+    addExpense: async (request, response) => {
         //calculating the date
         let ts = Date.now();
         let date_ob = new Date(ts);
@@ -15,8 +15,6 @@ module.exports = {
         let month = date_ob.getMonth() + 1;
         let year = date_ob.getFullYear();
         const today = month + "-" + date + "-" + year;
-
-
 
         const com = request.body.company;
         const reason = request.body.expensereason;
@@ -26,7 +24,7 @@ module.exports = {
 
         var exp = new Expense({
             company: com,
-            expensereason: reason,  
+            expensereason: reason,
             amount: expenseamount,
             date: today
         });
@@ -38,7 +36,6 @@ module.exports = {
                     expense: expenseamount,
                     date: today
                 });
-
                 statement.save((error, result) => {
                     if (!error) {
                         console.log(result);
@@ -59,7 +56,44 @@ module.exports = {
                 console.log('Error adding expense' + JSON.stringify(error, undefined, 2));
             }
         });
+    },
+    getDatedExpense:(request,response)=>{
+        const date=request.body.date;
+        let dc = new Date(date);
+        let d = dc.getDate() + 1;
+        let m = dc.getMonth() + 1;
+        let y = dc.getFullYear();
+        const ED = m + "-" + d + "-" + y;
+        
+        let datecheck = new Date(ED);
 
+
+        console.log(datecheck);
+
+         Expense.find((error,results)=>{
+             if(!error){
+                results.forEach((element)=>{
+                    //  console.log(element.date)
+                    //  let date_ob = new Date(element.date);
+                    //  let day = date_ob.getDate() - 1;
+                    //  let month = date_ob.getMonth() + 1;
+                    //  let year = date_ob.getFullYear();
+                    //  const expDate = month + "-" + day + "-" + year;
+                    //  console.log(expDate)
+                    //  return element.date === datecheck
+
+                    if(element.date === datecheck){
+                        console.log(element);
+                    }
+                 });
+                //  console.log(expenseDatas);
+             }
+             else{
+                 console.log('NOOO')
+             }
+
+         });
+         
     }
 
 }

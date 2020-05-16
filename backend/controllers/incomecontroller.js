@@ -6,7 +6,7 @@ const Statement = require('../models/statementmodel');
 
 
 module.exports = {
-    addincome: async (request, response) => {
+    addIncome: async (request, response) => {
         // current timestamp in milliseconds
         let ts = Date.now();
         let date_ob = new Date(ts);
