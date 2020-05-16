@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router'
 
 import { IncomeService } from '../../shared/income.service';
 import { NgForm } from '@angular/forms';
-
 
 
 @Component({
@@ -13,29 +13,21 @@ import { NgForm } from '@angular/forms';
 })
 export class IncomeComponent implements OnInit {
 
-
-
-  constructor(public incomeservice: IncomeService) { }
-
-
-
-
+  constructor(public incomeservice: IncomeService, private router:Router) { }
 
   ngOnInit(): void {
-    this.resetForm();
   }
 
-  resetForm(form?: NgForm) {
-    if (form)
-      form.reset();
-    this.incomeservice.selectedIncome = {
+  resetForm(form: NgForm) {
+    form.resetForm();
+    this.incomeservice.selectedIncome={
       _id: "",
       company: "Akshaya Paral",
       service: "",
       bankcharge: 0,
       servicecharge: 0,
       bankservicecharge: 0,
-    }
+    };
   }
 
   onSubmit(form: NgForm) {

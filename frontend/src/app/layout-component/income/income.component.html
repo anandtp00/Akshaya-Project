@@ -8,8 +8,8 @@
             <div class="card-body ">
                 <div class="row">
                     <div class="col-md-12">
-                        <form #incomeForm="ngForm" (ngSubmit)="onSubmit(incomeForm)">
-                            <input type="hidden" class="form-control" name="_id" #_id="ngModel"
+                        <form #incomeForm="ngForm" (ngSubmit)="incomeForm.valid && onSubmit(incomeForm)">
+                            <input type="hidden" class="form-control" name="_id" #name="ngModel"
                                 [(ngModel)]="incomeservice.selectedIncome._id">
                             <div class="row">
                                 <div class="col-md-6 pr-1">
