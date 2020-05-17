@@ -27,7 +27,7 @@
                                     <div class="form-group">
                                         <label>Bank charge</label>
                                         <input type="number" class="form-control" placeholder="Enter Bank Charge"
-                                             name="bankcharge" #bankcharge="ngModel"  value=0
+                                            name="bankcharge" #bankcharge="ngModel" value=0
                                             [(ngModel)]="incomeservice.selectedIncome.bankcharge">
                                     </div>
                                 </div>
@@ -35,7 +35,7 @@
                                     <div class="form-group">
                                         <label>Service Charge</label>
                                         <input type="number" class="form-control" placeholder="Enter Service Charge"
-                                             required name="servicecharge" #company="ngModel" value=0
+                                            required name="servicecharge" #company="ngModel" value=0
                                             [(ngModel)]="incomeservice.selectedIncome.servicecharge">
                                     </div>
                                 </div>
@@ -43,14 +43,16 @@
                                     <div class="form-group">
                                         <label>Bank Service Charge (if any)</label>
                                         <input type="number" class="form-control"
-                                            placeholder="Enter Bank Service Charge"  name="bankservicecharge" value=0 #bankservicecharge="ngModel"
+                                            placeholder="Enter Bank Service Charge" name="bankservicecharge" value=0
+                                            #bankservicecharge="ngModel"
                                             [(ngModel)]="incomeservice.selectedIncome.bankservicecharge">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="update ml-auto mr-auto">
-                                    <button type="submit" [disabled]="!incomeForm.valid" class="btn btn-primary btn-round">Save</button>
+                                    <button type="submit" [disabled]="!incomeForm.valid"
+                                        class="btn btn-primary btn-round">Save</button>
                                 </div>
                             </div>
                         </form>
@@ -82,8 +84,13 @@
                                 placeholder="Select Date">
                         </div>
                     </div>
-                    <div class="col-md-4 pr-1 dateshow">
-                        <p>Showing : </p>
+                    <div class="col-md-4 pr-1">
+                        <div class="update ml-auto mr-auto datebutton">
+                            <button type="button" class="btn btn-primary btn-round">Save</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4 pr-1">
+                        <p>Showing : {{incomeservice.today}}</p>
                     </div>
                 </div>
                 <div class="row">
@@ -107,7 +114,20 @@
                                 </th>
                             </thead>
                             <tbody>
-
+                                <tr *ngFor="let inc of incomeservice.incomes">
+                                    <td>{{inc.service}}</td>
+                                    <td>{{inc.bankcharge}}</td>
+                                    <td>{{inc.servicecharge}}</td>
+                                    <td>{{inc.bankservicecharge}}</td>
+                                    <td>
+                                        <a href="#" class="btn btn-outline-info btn-sm">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit 
+                                          </a>&nbsp;
+                                          <a href="#" class="btn btn-outline-danger btn-sm">
+                                            <i class="fa fa-trash" aria-hidden="true"></i> Delete 
+                                          </a>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -118,9 +138,9 @@
                 <div class="stats">
                     <div class="row">
                         <div class="col-md-4">
-                            <p>Total Bank Charge : </p>
-                            <p>Total Service Charge : </p>
-                            <p>Total Bank Service Charge : </p>
+                            <p>Total Bank Charge : {{incomeservice.tbc}}</p>
+                            <p>Total Service Charge : {{incomeservice.tsc}}</p>
+                            <p>Total Bank Service Charge : {{incomeservice.tbsc}}</p>
                         </div>
                     </div>
                 </div>

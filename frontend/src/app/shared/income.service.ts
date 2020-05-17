@@ -19,7 +19,13 @@ export class IncomeService {
       bankservicecharge: 0,
   }
 
-  income: Income[];
+  incomes: Income[];
+
+  today: String;
+
+  tbc: Number;
+  tsc: Number;
+  tbsc: Number;
 
   // readonly baseURL = 'http://localhost:4000/income';
 
@@ -28,6 +34,10 @@ export class IncomeService {
   postIncome(inc : Income){
     return this.http.post(environment.incomebaseURL+'/add', inc);
 
+  }
+
+  getTodaysIncome(){
+    return this.http.get(environment.incomebaseURL+'/gettodaysincome')
   }
 
 

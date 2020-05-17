@@ -14,3 +14,7 @@ input.ng-invalid.ng-dirty{
     pointer-events:none;
     box-shadow: slategray;
 }
+
+.datebutton{
+    margin-top: 25px;
+}

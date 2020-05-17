@@ -75,5 +75,28 @@ module.exports = {
                 console.log('Error adding income' + JSON.stringify(error, undefined, 2));
             }
         });
+    },
+    getTodayIncome: (request, response) => {
+        let ts = Date.now();
+        let dc = new Date(ts);
+
+        console.log(dc);
+
+        Income.find((error, results) => {
+            console.log(results)
+            if (!error) {
+                const datas = results.filter((element) => {
+                    return new Date(element.date).getDate === dc.getDate
+                });
+                return response.status(200).json(datas);
+            }
+            else {
+                return response.status(400).json({
+                    success: 0,
+                    message: "Not added any income yet!"
+                });
+            }
+
+        });
     }
 }
