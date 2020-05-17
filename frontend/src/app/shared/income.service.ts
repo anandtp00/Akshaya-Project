@@ -26,6 +26,7 @@ export class IncomeService {
   tbc: Number;
   tsc: Number;
   tbsc: Number;
+  tinc : Number;
 
   // readonly baseURL = 'http://localhost:4000/income';
 

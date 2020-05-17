@@ -69,10 +69,16 @@ export class IncomeComponent implements OnInit {
        sum1=sum1+element.bankcharge;
        sum2=sum2+element.servicecharge;
        sum3=sum3+element.bankservicecharge;
-      }))
+      }));
       this.incomeservice.tbc=sum1;
       this.incomeservice.tsc=sum2;
       this.incomeservice.tbsc=sum3;
+
+      let sum4=0;
+      this.incomeservice.incomes.forEach((element)=>{
+        sum4=sum4+element.bankcharge+element.servicecharge+element.bankservicecharge;
+      });
+      this.incomeservice.tinc=sum4;
     });
   }
 
