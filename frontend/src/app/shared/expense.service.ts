@@ -20,6 +20,11 @@ export class ExpenseService {
 
   expenses: Expense[];
 
+  
+  today: String;
+
+  texp: Number;
+
   constructor(private http: HttpClient) { }
 
   postExpense(exp : Expense){

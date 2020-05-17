@@ -69,7 +69,7 @@
                         </div>
                     </div>
                     <div class="col-md-4 pr-1 dateshow">
-                        <p>Showing : </p>
+                        <p>Showing : {{expenseservice.today}}</p>
                     </div>
                 </div>
                 <div class="row">
@@ -90,7 +90,14 @@
                                 <tr *ngFor="let exp of expenseservice.expenses">
                                     <td>{{exp.expensereason}}</td>
                                     <td>{{exp.amount}}</td>
-                                    <td>Action</td>
+                                    <td class="text-right"> 
+                                        <a href="#" class="btn btn-outline-info btn-sm">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
+                                        </a>&nbsp;
+                                        <a href="#" class="btn btn-outline-danger btn-sm">
+                                            <i class="fa fa-trash" aria-hidden="true"></i> Delete
+                                        </a>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -102,7 +109,7 @@
                 <div class="stats">
                     <div class="row">
                         <div class="col-md-4">
-                            <p>Total Expense : </p>
+                            <p>Total Expense : {{expenseservice.texp}}</p>
                         </div>
                     </div>
                 </div>
