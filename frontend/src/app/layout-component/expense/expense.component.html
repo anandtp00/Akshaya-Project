@@ -2,41 +2,41 @@
     <div class="col-md-12">
         <div class="card ">
             <div class="card-header ">
-                <h5 class="card-title">Expense Detials </h5>
-                <p class="card-category">Add Expense detials</p>
+                <h5 class="card-title">Income Detials </h5>
+                <p class="card-category">Add Income detials</p>
             </div>
             <div class="card-body ">
                 <div class="row">
                     <div class="col-md-12">
-                        <form>
+                        <h4 class="card-subtitle mb-2 text-muted">Akshaya Paral</h4>
+                        <form #expenseForm="ngForm" (ngSubmit)="expenseForm.valid && onSubmit(expenseForm)">
+                            <input type="hidden" class="form-control" name="_id" #name="ngModel"
+                                [(ngModel)]="expenseservice.selectedExpense._id">
                             <div class="row">
-                                <div class="col-md-6 pr-1">
-                                    <div class="form-group">
-                                        <label>Company (disabled)</label>
-                                        <input type="text" class="form-control" disabled="" placeholder="Company"
-                                            value="Akshaya Paral">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 px-1">
+                                <div class="col-md-4 px-1">
                                     <div class="form-group">
                                         <label>Expense Reason</label>
                                         <input type="text" class="form-control" placeholder="Enter Expense Reason"
-                                            required>
+                                            required name="expensereason" #expensereason="ngModel"
+                                            [(ngModel)]="expenseservice.selectedExpense.expensereason">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
+
+
                                 <div class="col-md-4 pr-1">
                                     <div class="form-group">
                                         <label>Amount</label>
-                                        <input type="number" class="form-control" placeholder="Enter Expense Amount"
-                                            value=0 required>
+                                        <input type="number" class="form-control" placeholder="Enter Amount"
+                                            name="amount" #amount="ngModel" value=0
+                                            [(ngModel)]="expenseservice.selectedExpense.amount">
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row">
                                 <div class="update ml-auto mr-auto">
-                                    <button type="submit" class="btn btn-primary btn-round">Save</button>
+                                    <button type="submit" [disabled]="!expenseForm.valid"
+                                        class="btn btn-primary btn-round">Save</button>
                                 </div>
                             </div>
                         </form>
@@ -87,7 +87,11 @@
                                 </th>
                             </thead>
                             <tbody>
-
+                                <tr *ngFor="let exp of expenseservice.expenses">
+                                    <td>{{exp.expensereason}}</td>
+                                    <td>{{exp.amount}}</td>
+                                    <td>Action</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

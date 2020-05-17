@@ -4,7 +4,7 @@ const router=require('express').Router();
 const expensecontroller=require('../controllers/expensecontroller');
 
 router.post('/add',expensecontroller.addExpense);
-router.get('/getexpense',expensecontroller.getDatedExpense);
+router.get('/gettodaysexpense',expensecontroller.getTodayExpense);
 
 
 

@@ -16,11 +16,11 @@ module.exports = {
         let year = date_ob.getFullYear();
         const today = month + "-" + date + "-" + year;
 
-        const com = request.body.company;
+        const com = "Akshaya Paral";
         const reason = request.body.expensereason;
         const expenseamount = request.body.amount;
 
-        const transaction = 'Transaction on' + reason;
+        const transaction = 'Transaction on ' + reason;
 
         var exp = new Expense({
             company: com,
@@ -57,43 +57,27 @@ module.exports = {
             }
         });
     },
-    getDatedExpense:(request,response)=>{
-        const date=request.body.date;
-        let dc = new Date(date);
-        let d = dc.getDate() + 1;
-        let m = dc.getMonth() + 1;
-        let y = dc.getFullYear();
-        const ED = m + "-" + d + "-" + y;
-        
-        let datecheck = new Date(ED);
+    getTodayExpense: (request, response) => {
+        let ts = Date.now();
+        let dc = new Date(ts);
 
+        console.log(dc);
 
-        console.log(datecheck);
+        Expense.find((error, results) => {
+            console.log(results)
+            if (!error) {
+                const datas = results.filter((element) => {
+                    return new Date(element.date).getDate === dc.getDate
+                });
+                return response.status(200).json(datas);
+            }
+            else {
+                return response.status(400).json({
+                    success: 0,
+                    message: "Not added any expense yet!"
+                });
+            }
 
-         Expense.find((error,results)=>{
-             if(!error){
-                results.forEach((element)=>{
-                    //  console.log(element.date)
-                    //  let date_ob = new Date(element.date);
-                    //  let day = date_ob.getDate() - 1;
-                    //  let month = date_ob.getMonth() + 1;
-                    //  let year = date_ob.getFullYear();
-                    //  const expDate = month + "-" + day + "-" + year;
-                    //  console.log(expDate)
-                    //  return element.date === datecheck
-
-                    if(element.date === datecheck){
-                        console.log(element);
-                    }
-                 });
-                //  console.log(expenseDatas);
-             }
-             else{
-                 console.log('NOOO')
-             }
-
-         });
-         
+        });
     }
-
 }
