@@ -13,7 +13,6 @@ export class IncomeService {
 
   selectedIncome: Income={
     _id: "",
-      company: "Company Name",
       service: "",
       bankcharge: 0,
       servicecharge: 0,

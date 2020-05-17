@@ -8,19 +8,12 @@
             <div class="card-body ">
                 <div class="row">
                     <div class="col-md-12">
+                        <h4 class="card-subtitle mb-2 text-muted">Akshaya Paral</h4>
                         <form #incomeForm="ngForm" (ngSubmit)="incomeForm.valid && onSubmit(incomeForm)">
                             <input type="hidden" class="form-control" name="_id" #name="ngModel"
                                 [(ngModel)]="incomeservice.selectedIncome._id">
                             <div class="row">
-                                <div class="col-md-6 pr-1">
-                                    <div class="form-group disable">
-                                        <label>Company (disabled)</label>
-                                        <input type="text" class="form-control"
-                                          name="company" #company="ngModel"
-                                            [(ngModel)]="incomeservice.selectedIncome.company">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 px-1">
+                                <div class="col-md-4 px-1">
                                     <div class="form-group">
                                         <label>Service</label>
                                         <input type="text" class="form-control" placeholder="Enter Service details"
@@ -34,7 +27,7 @@
                                     <div class="form-group">
                                         <label>Bank charge</label>
                                         <input type="number" class="form-control" placeholder="Enter Bank Charge"
-                                            value=0 name="bankcharge" #bankcharge="ngModel"
+                                             name="bankcharge" #bankcharge="ngModel"  value=0
                                             [(ngModel)]="incomeservice.selectedIncome.bankcharge">
                                     </div>
                                 </div>
@@ -42,7 +35,7 @@
                                     <div class="form-group">
                                         <label>Service Charge</label>
                                         <input type="number" class="form-control" placeholder="Enter Service Charge"
-                                            value=0 required name="servicecharge" #company="ngModel"
+                                             required name="servicecharge" #company="ngModel" value=0
                                             [(ngModel)]="incomeservice.selectedIncome.servicecharge">
                                     </div>
                                 </div>
@@ -50,7 +43,7 @@
                                     <div class="form-group">
                                         <label>Bank Service Charge (if any)</label>
                                         <input type="number" class="form-control"
-                                            placeholder="Enter Bank Service Charge" value=0 name="bankservicecharge" #bankservicecharge="ngModel"
+                                            placeholder="Enter Bank Service Charge"  name="bankservicecharge" value=0 #bankservicecharge="ngModel"
                                             [(ngModel)]="incomeservice.selectedIncome.bankservicecharge">
                                     </div>
                                 </div>

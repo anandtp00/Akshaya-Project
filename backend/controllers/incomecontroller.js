@@ -15,12 +15,22 @@ module.exports = {
         let year = date_ob.getFullYear();
         const today = month + "-" + date + "-" + year;
 
-        const com = request.body.company;
+        const com = "Akshaya Paral";
         const reason = request.body.service;
-        const bcharge = request.body.bankcharge;
-        const scharge = request.body.servicecharge;
-        const bscharge = request.body.bankservicecharge;
+        var bcharge = request.body.bankcharge;
+        var scharge = request.body.servicecharge;
+        var bscharge = request.body.bankservicecharge;
         const total = bcharge + scharge + bscharge;
+
+        if (bscharge == null) {
+            bscharge = 0;
+        }
+        if (bcharge == null) {
+            bcharge = 0;
+        }
+        if (scharge == null) {
+            scharge = 0;
+        }
 
         const transaction = 'Transaction on ' + reason;
 

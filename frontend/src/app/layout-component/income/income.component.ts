@@ -16,13 +16,13 @@ export class IncomeComponent implements OnInit {
   constructor(public incomeservice: IncomeService, private router:Router) { }
 
   ngOnInit(): void {
+    
   }
 
   resetForm(form: NgForm) {
     form.resetForm();
     this.incomeservice.selectedIncome={
       _id: "",
-      company: "Akshaya Paral",
       service: "",
       bankcharge: 0,
       servicecharge: 0,
