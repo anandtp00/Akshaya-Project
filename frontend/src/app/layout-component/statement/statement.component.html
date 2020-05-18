@@ -14,7 +14,7 @@
                         </div>
                     </div>
                     <div class="col-md-4 pr-1 dateshow">
-                        <p>Showing : </p>
+                        <p>Showing : {{statementservice.today}}</p>
                     </div>
                 </div>
                 <div class="row">
@@ -24,15 +24,19 @@
                                 <th>
                                     Transaction Details
                                 </th>
-                                <th class="text-right">
+                                <th>
                                     Income
                                 </th>
-                                <th class="text-right">
+                                <th>
                                     Expense
                                 </th>
                             </thead>
                             <tbody>
-
+                                <tr *ngFor="let st of statementservice.statements">
+                                    <td>{{st.transactiondetails}}</td>
+                                    <td>{{st.income}}</td>
+                                    <td>{{st.expense}}</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -43,8 +47,8 @@
                 <div class="stats">
                     <div class="row">
                         <div class="col-md-4">
-                            <p>Total Income : </p>
-                            <p>Total Expense : </p>
+                            <p>Total Income : {{statementservice.tIncome}}</p>
+                            <p>Total Expense : {{statementservice.tExpense}}</p>
                         </div>
                     </div>
                 </div>
