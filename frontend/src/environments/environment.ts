@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   incomebaseURL:'http://localhost:4000/income',
-  expensebaseURL:'http://localhost:4000/expense'
+  expensebaseURL:'http://localhost:4000/expense',
+  statementbaseURL:'http://localhost:4000/statement'
 };
 
 /*

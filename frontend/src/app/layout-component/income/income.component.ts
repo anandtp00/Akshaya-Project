@@ -81,5 +81,15 @@ export class IncomeComponent implements OnInit {
       this.incomeservice.tinc=sum4;
     });
   }
+  
+
+  onDelete(_id: String, form: NgForm){
+    if(confirm("Are you sure to delete this record?")==true){
+      this.incomeservice.deleteIncome(_id).subscribe((response)=>{
+        this.todaysIncome();
+        this.resetForm(form);
+      })
+    }
+  }
 
 }

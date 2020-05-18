@@ -41,5 +41,8 @@ export class IncomeService {
     return this.http.get(environment.incomebaseURL+'/gettodaysincome')
   }
 
+  deleteIncome(_id: String){
+    return this.http.get(environment.incomebaseURL+'/${_id}')
+  }
 
 }

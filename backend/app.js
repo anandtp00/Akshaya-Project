@@ -12,7 +12,8 @@ require('./dbconfig/dbconfiguration');
 
 //routers accessing
 const incrouter = require('./routes/incomeroutes');
-const exprouter = require('./routes/expenseroutse')
+const exprouter = require('./routes/expenseroutse');
+const staterouter = require('./routes/statementrouter');
 
 // var datetime = new Date();
 // let date = ("0" + datetime.getDate()).slice(-2);
@@ -26,8 +27,9 @@ app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cors({ origin: 'http://localhost:4200' }));
 
 //connecting to router
-app.use('/income', incrouter)
-app.use('/expense',exprouter)
+app.use('/income', incrouter);
+app.use('/expense',exprouter);
+app.use('/statement',staterouter)
 
 //server listening to the port given
 const port = process.env.PORT || 4000

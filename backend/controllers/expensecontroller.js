@@ -11,10 +11,10 @@ module.exports = {
         //calculating the date
         let ts = Date.now();
         let date_ob = new Date(ts);
-        let date = date_ob.getDate() + 1;
-        let month = date_ob.getMonth() + 1;
-        let year = date_ob.getFullYear();
-        const today = month + "-" + date + "-" + year;
+        // let date = date_ob.getDate() + 1;
+        // let month = date_ob.getMonth() + 1;
+        // let year = date_ob.getFullYear();
+        // const today = month + "-" + date + "-" + year;
 
         const com = "Akshaya Paral";
         const reason = request.body.expensereason;
@@ -26,7 +26,7 @@ module.exports = {
             company: com,
             expensereason: reason,
             amount: expenseamount,
-            date: today
+            date: date_ob
         });
         await exp.save((error, result) => {
             if (!error) {
@@ -34,7 +34,7 @@ module.exports = {
                     company: com,
                     transactiondetails: transaction,
                     expense: expenseamount,
-                    date: today
+                    date: date_ob
                 });
                 statement.save((error, result) => {
                     if (!error) {
@@ -60,6 +60,8 @@ module.exports = {
     getTodayExpense: (request, response) => {
         let ts = Date.now();
         let dc = new Date(ts);
+        const day=dc.getDate();
+        const mon =dc.getMonth();
 
         console.log(dc);
 
@@ -67,7 +69,10 @@ module.exports = {
             console.log(results)
             if (!error) {
                 const datas = results.filter((element) => {
-                    return new Date(element.date).getDate === dc.getDate
+                    let d=new Date(element.date);
+                    const ed=d.getDate();
+                    const em=d.getMonth();
+                    return day===ed && mon === em
                 });
                 return response.status(200).json(datas);
             }
