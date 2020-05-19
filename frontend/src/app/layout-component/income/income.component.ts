@@ -46,10 +46,17 @@ export class IncomeComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     // console.log(form.value);
-    this.incomeservice.postIncome(form.value).subscribe((response) => {
-      this.resetForm(form);
-      this.todaysIncome();
-    });
+    if (form.value._id == "") {
+      this.incomeservice.postIncome(form.value).subscribe((response) => {
+        this.resetForm(form);
+        this.todaysIncome();
+      });
+    } else {
+      this.incomeservice.putIncome(form.value).subscribe((response) => {
+        this.resetForm(form);
+        this.todaysIncome();
+      });
+    }
   }
 
   todaysIncome() {
@@ -60,36 +67,41 @@ export class IncomeComponent implements OnInit {
       let month = date_ob.getMonth() + 1;
       let year = date_ob.getFullYear();
       const today = date + "-" + month + "-" + year;
-      this.incomeservice.today=today
+      this.incomeservice.today = today
 
-      let sum1=0;
-      let sum2=0;
-      let sum3=0;
-      this.incomeservice.incomes.forEach((element=>{
-       sum1=sum1+element.bankcharge;
-       sum2=sum2+element.servicecharge;
-       sum3=sum3+element.bankservicecharge;
+      let sum1 = 0;
+      let sum2 = 0;
+      let sum3 = 0;
+      this.incomeservice.incomes.forEach((element => {
+        sum1 = sum1 + element.bankcharge;
+        sum2 = sum2 + element.servicecharge;
+        sum3 = sum3 + element.bankservicecharge;
       }));
-      this.incomeservice.tbc=sum1;
-      this.incomeservice.tsc=sum2;
-      this.incomeservice.tbsc=sum3;
+      this.incomeservice.tbc = sum1;
+      this.incomeservice.tsc = sum2;
+      this.incomeservice.tbsc = sum3;
 
-      let sum4=0;
-      this.incomeservice.incomes.forEach((element)=>{
-        sum4=sum4+element.bankcharge+element.servicecharge+element.bankservicecharge;
+      let sum4 = 0;
+      this.incomeservice.incomes.forEach((element) => {
+        sum4 = sum4 + element.bankcharge + element.servicecharge + element.bankservicecharge;
       });
-      this.incomeservice.tinc=sum4;
+      this.incomeservice.tinc = sum4;
     });
   }
-  
 
-  onDelete(_id: String, form: NgForm){
-    if(confirm("Are you sure to delete this record?")==true){
-      this.incomeservice.deleteIncome(_id).subscribe((response)=>{
-        this.todaysIncome();
-        this.resetForm(form);
-      })
-    }
+
+  onDelete(_id: String, form: NgForm) {
+
+    this.incomeservice.deleteIncome(_id).subscribe((response) => {
+      this.resetForm(form);
+      this.todaysIncome();
+      this.router.navigate['/'];
+    })
+
+  }
+
+  onEdit(inc: Income) {
+    this.incomeservice.selectedIncome = inc;
   }
 
 }

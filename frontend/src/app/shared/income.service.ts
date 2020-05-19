@@ -42,7 +42,12 @@ export class IncomeService {
   }
 
   deleteIncome(_id: String){
-    return this.http.get(environment.incomebaseURL+'/${_id}')
+    return this.http.get(environment.incomebaseURL+'/deleteincome/'+_id)
   }
+
+  putIncome(inc: Income){
+    return this.http.put(environment.incomebaseURL+'/updateincome/'+inc._id,inc)
+  }
+ 
 
 }
