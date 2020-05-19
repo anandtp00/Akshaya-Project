@@ -12,6 +12,7 @@ var IncomeSchema = mongoose.Schema({
     bankservicecharge: { type: Number, default: 0 },
     date: { type: Date, required: true },
     totalincome: { type: Number, required: true },
+    key: { type: String, required: true }
 }, { timestamps: true });
 
 module.exports = mongoose.model('Income', IncomeSchema);
