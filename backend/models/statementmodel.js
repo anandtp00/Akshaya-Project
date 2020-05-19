@@ -10,7 +10,8 @@ var StatementSchema = mongoose.Schema({
     expense: {
         type: Number
     },
-    date: { type: Date, required: true }
+    date: { type: Date, required: true },
+    key: { type: String, required: true }
 }, { timestamps: true });
 
 module.exports = mongoose.model('Statement', StatementSchema);

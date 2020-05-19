@@ -9,7 +9,8 @@ var ExpenseSchema = mongoose.Schema({
         default: 0,
         required: true
     },
-    date: { type: Date, required: true }
+    date: { type: Date, required: true },
+    key: { type: String, required: true }
 }, { timestamps: true });
 
 module.exports = mongoose.model('Expense', ExpenseSchema);

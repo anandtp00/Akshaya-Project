@@ -11,10 +11,12 @@ module.exports = {
         //calculating the date
         let ts = Date.now();
         let date_ob = new Date(ts);
-        // let date = date_ob.getDate() + 1;
-        // let month = date_ob.getMonth() + 1;
-        // let year = date_ob.getFullYear();
-        // const today = month + "-" + date + "-" + year;
+        let d = date_ob.getDate();
+        let h = date_ob.getHours();
+        let m = date_ob.getMinutes();
+
+        let KEY = d+':'+h+':'+m;
+
 
         const com = "Akshaya Paral";
         const reason = request.body.expensereason;
@@ -26,7 +28,8 @@ module.exports = {
             company: com,
             expensereason: reason,
             amount: expenseamount,
-            date: date_ob
+            date: date_ob,
+            key:KEY
         });
         await exp.save((error, result) => {
             if (!error) {
@@ -34,7 +37,8 @@ module.exports = {
                     company: com,
                     transactiondetails: transaction,
                     expense: expenseamount,
-                    date: date_ob
+                    date: date_ob,
+                    key:KEY
                 });
                 statement.save((error, result) => {
                     if (!error) {
