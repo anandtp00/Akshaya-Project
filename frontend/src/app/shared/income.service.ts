@@ -46,8 +46,7 @@ export class IncomeService {
   }
 
   putIncome(inc: Income){
-    return this.http.put(environment.incomebaseURL+'/updateincome/'+inc._id,inc)
+    return this.http.put(environment.incomebaseURL+'/updateincome/'+inc._id,inc);
   }
  
-
 }
