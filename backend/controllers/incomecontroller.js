@@ -38,7 +38,6 @@ module.exports = {
 
         const transaction = 'Transaction on ' + reason;
 
-
         var inc = new Income({
             company: com,
             service: reason,
@@ -51,7 +50,6 @@ module.exports = {
         });
         await inc.save((error, result) => {
             if (!error) {
-
                 var statement = new Statement({
                     company: com,
                     transactiondetails: transaction,
@@ -69,7 +67,6 @@ module.exports = {
                         console.log('Error adding income to statement' + JSON.stringify(error, undefined, 2));
                     }
                 });
-
                 console.log(result);
                 response.status(200).json({
                     success: 1,
@@ -87,7 +84,6 @@ module.exports = {
         let dc = new Date(ts);
         const day = dc.getDate();
         const mon = dc.getMonth();
-
 
         Income.find((error, results) => {
             // console.log(results)
@@ -118,7 +114,6 @@ module.exports = {
                 message: "No records found with id : ${request.params._id}"
             });
         }
-
         Income.findById(request.params._id, (error, result) => {
             if (!error) {
                 return response.status(200).json(result);
@@ -129,33 +124,16 @@ module.exports = {
                     success: 0,
                     message: "Error in retriving employee"
                 });
-
             }
         })
     },
     updateIncomeData: (request, response) => {
-        if (!ObjectId.isValid(request.params._id)) {
-            return response.sttaus(400).json({
+        if (!ObjectId.isValid(request.params.id)) {
+            return response.status(400).json({
                 success: 0,
                 message: "No records found with id : ${request.params._id}"
             });
         }
-        const incdetails = []
-        Income.findById(request.params._id, (error, result) => {
-            if (!error) {
-                incdetails = result
-            }
-            else {
-                console.log(JSON.stringify(error, undefined, 2));
-                return response.status(400).json({
-                    success: 0,
-                    message: "Error in retriving income details"
-                });
-            }
-        })
-
-        console.log(incdetails.key);
-
 
         let ts = Date.now();
         let date_ob = new Date(ts);
@@ -186,8 +164,7 @@ module.exports = {
 
         const transaction = 'Transaction on ' + reason + ', Updated : ' + d + ':' + mo + ':' + y;
 
-
-        var inc = new Income({
+        var inc = {
             company: com,
             service: reason,
             bankcharge: bcharge,
@@ -196,30 +173,44 @@ module.exports = {
             date: date_ob,
             totalincome: total,
             key: KEY
-        });
-        Income.findByIdAndUpdate(request.params._id, { $set: inc }, { new: true }, (error, results) => {
+        };
+        Income.findById(request.params.id, (error, result) => {
             if (!error) {
-                var statement = new Statement({
-                    company: com,
-                    transactiondetails: transaction,
-                    income: total,
-                    date: date_ob,
-                    key: KEY
-                });
-                var query = { key: incdetails.key };
-                Statement.updateOne(query, { $set: statement }, (error, result) => {
+                const resultkey = result.key;
+                console.log(resultkey);
+                var Query = {key:resultkey }
+                Income.findByIdAndUpdate(request.params.id, { $set: inc },{ useFindAndModify: false }, (error, results) => {
                     if (!error) {
-                        console.log(result);
-                        console.log('updated statement');
+                        var statement = {
+                            company: com,
+                            transactiondetails: transaction,
+                            income: total,
+                            date: date_ob,
+                            key: KEY
+                        };
+                        var query = { key: resultkey };
+                        Statement.updateOne(query, { $set: statement }, (error, result) => {
+                            if (!error) {
+                                console.log(result);
+                                console.log('updated statement');
+                            }
+                            else {
+                                console.log('Error updating income to statement' + JSON.stringify(error, undefined, 2));
+                            }
+                        })
+                        return response.status(200).json(results);
                     }
                     else {
-                        console.log('Error updating income to statement' + JSON.stringify(error, undefined, 2));
+                        console.log('Error updating income' + JSON.stringify(error, undefined, 2));
                     }
                 })
-                return response.status(200).json(results);
             }
             else {
-                console.log('Error updating income' + JSON.stringify(error, undefined, 2));
+                console.log(JSON.stringify(error, undefined, 2));
+                return response.status(400).json({
+                    success: 0,
+                    message: "Error in retriving income details"
+                });
             }
         })
     },
@@ -230,8 +221,6 @@ module.exports = {
                 message: "No records found with id : ${request.params._id}"
             });
         }
-
-
         Income.findById(request.params._id, (error, result) => {
             if (!error) {
                 console.log(result.key);
@@ -263,8 +252,5 @@ module.exports = {
                 });
             }
         })
-
-
-
     }
 }
