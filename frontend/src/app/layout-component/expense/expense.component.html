@@ -91,10 +91,10 @@
                                     <td>{{exp.expensereason}}</td>
                                     <td>{{exp.amount}}</td>
                                     <td class="text-right"> 
-                                        <a href="#" class="btn btn-outline-info btn-sm">
+                                        <a class="btn btn-outline-info btn-sm"(click)="onEdit(exp)">
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
                                         </a>&nbsp;
-                                        <a href="#" class="btn btn-outline-danger btn-sm">
+                                        <a class="btn btn-outline-danger btn-sm" (click)="onDelete(exp._id,expenseForm)">
                                             <i class="fa fa-trash" aria-hidden="true"></i> Delete
                                         </a>
                                     </td>
