@@ -1,4 +1,4 @@
-
+var ObjectId = require('mongoose').Types.ObjectId;
 
 
 const Expense = require('../models/expensemodel');
@@ -88,5 +88,133 @@ module.exports = {
             }
 
         });
+    },
+    getExpenseData: (request, response) => {
+        if (!ObjectId.isValid(request.params._id)) {
+            return response.sttaus(400).json({
+                success: 0,
+                message: "No records found with id : ${request.params._id}"
+            });
+        }
+        Expense.findById(request.params._id, (error, result) => {
+            if (!error) {
+                return response.status(200).json(result);
+            }
+            else {
+                console.log(JSON.stringify(error, undefined, 2));
+                return response.status(400).json({
+                    success: 0,
+                    message: "Error in retriving Expense"
+                });
+            }
+        })
+    },
+    updateExpenseData: (request, response) => {
+        if (!ObjectId.isValid(request.params.id)) {
+            return response.status(400).json({
+                success: 0,
+                message: "No records found with id : ${request.params._id}"
+            });
+        }
+
+        let ts = Date.now();
+        let date_ob = new Date(ts);
+        let d = date_ob.getDate();
+        let h = date_ob.getHours();
+        let m = date_ob.getMinutes();
+        let mo = date_ob.getMonth();
+        let y = date_ob.getFullYear();
+
+        let KEY = d + ':' + h + ':' + m;
+
+        const com = "Akshaya Paral";
+        const reason = request.body.expensereason;
+        const expenseamount = request.body.amount;
+
+        const transaction = 'Transaction on ' + reason+' Updated : '+ d + ':' + mo + ':' + y;
+
+        var exp = {
+            company: com,
+            expensereason: reason,
+            amount: expenseamount,
+            date: date_ob,
+            key:KEY
+        };
+        Expense.findById(request.params.id, (error, result) => {
+            if (!error) {
+                const resultkey = result.key;
+                Expense.findByIdAndUpdate(request.params.id, { $set: exp },{ useFindAndModify: false }, (error, results) => {
+                    if (!error) {
+                        var statement = {
+                            company: com,
+                            transactiondetails: transaction,
+                            expense: expenseamount,
+                            date: date_ob,
+                            key: KEY
+                        };
+                        var query = { key: resultkey };
+                        Statement.updateOne(query, { $set: statement }, (error, result) => {
+                            if (!error) {
+                                console.log(result);
+                                console.log('updated statement');
+                            }
+                            else {
+                                console.log('Error updating expense to statement' + JSON.stringify(error, undefined, 2));
+                            }
+                        })
+                        return response.status(200).json(results);
+                    }
+                    else {
+                        console.log('Error updating Expense' + JSON.stringify(error, undefined, 2));
+                    }
+                })
+            }
+            else {
+                console.log(JSON.stringify(error, undefined, 2));
+                return response.status(400).json({
+                    success: 0,
+                    message: "Error in retriving expense details"
+                });
+            }
+        })
+    },
+    deleteExpenseData: (request, response) => {
+        if (!ObjectId.isValid(request.params._id)) {
+            return response.status(400).json({
+                success: 0,
+                message: "No records found with id : ${request.params._id}"
+            });
+        }
+        Expense.findById(request.params._id, (error, result) => {
+            if (!error) {
+                console.log(result.key);
+                const KEY = result.key;
+                Expense.findByIdAndRemove(request.params._id, { useFindAndModify: false }, (error, result) => {
+                    if (!error) {
+                        var query = { key: KEY };
+                        Statement.deleteOne(query, (error, doc) => {
+                            if (!error) {
+                                console.log(doc);
+                                console.log('deleted statement');
+                            }
+                            else {
+                                console.log('Error deleting statement' + JSON.stringify(error, undefined, 2));
+                            }
+                        })
+                        return response.status(200).json(result);
+                    }
+                    else {
+                        console.log('Error deleting Expense' + JSON.stringify(error, undefined, 2));
+                    }
+                });
+            }
+            else {
+                console.log(JSON.stringify(error, undefined, 2));
+                return response.status(400).json({
+                    success: 0,
+                    message: "Error in retriving Expense details"
+                });
+            }
+        })
     }
 }
