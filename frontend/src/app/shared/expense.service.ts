@@ -35,5 +35,13 @@ export class ExpenseService {
     return this.http.get(environment.expensebaseURL+'/gettodaysexpense')
   }
 
+  deleteExpense(_id: String){
+    return this.http.get(environment.expensebaseURL+'/deleteexpense/'+_id)
+  }
+
+  putExpense(exp: Expense){
+    return this.http.put(environment.expensebaseURL+'/updateexpense/'+exp._id,exp);
+  }
+
  
 }
