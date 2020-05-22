@@ -28,6 +28,8 @@ export class IncomeService {
   tbsc: Number;
   tinc : Number;
 
+  date : any;
+
   // readonly baseURL = 'http://localhost:4000/income';
 
   constructor(private http: HttpClient) { }
@@ -47,6 +49,10 @@ export class IncomeService {
 
   putIncome(inc: Income){
     return this.http.put(environment.incomebaseURL+'/updateincome/'+inc._id,inc);
+  }
+
+  getDatedIncome(date: any){
+    return this.http.get(environment.incomebaseURL+'/datedincome',date);
   }
  
 }

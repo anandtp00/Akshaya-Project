@@ -103,5 +103,35 @@ export class IncomeComponent implements OnInit {
   onEdit(inc: Income) {
     this.incomeservice.selectedIncome = inc;
   }
+  onDate(d: any) {
+    this.incomeservice.getDatedIncome(d).subscribe((response)=>{
+      this.incomeservice.incomes = response as unknown as Income[];
+      console.log(response[0].date);
+      let date_ob = new Date(response[0].date);
+      let date = date_ob.getDate();
+      let month = date_ob.getMonth() + 1;
+      let year = date_ob.getFullYear();
+      const today = date + "-" + month + "-" + year;
+      this.incomeservice.today = today
+
+      let sum1 = 0;
+      let sum2 = 0;
+      let sum3 = 0;
+      this.incomeservice.incomes.forEach((element => {
+        sum1 = sum1 + element.bankcharge;
+        sum2 = sum2 + element.servicecharge;
+        sum3 = sum3 + element.bankservicecharge;
+      }));
+      this.incomeservice.tbc = sum1;
+      this.incomeservice.tsc = sum2;
+      this.incomeservice.tbsc = sum3;
+
+      let sum4 = 0;
+      this.incomeservice.incomes.forEach((element) => {
+        sum4 = sum4 + element.bankcharge + element.servicecharge + element.bankservicecharge;
+      });
+      this.incomeservice.tinc = sum4;
+    })
+  }
 
 }
