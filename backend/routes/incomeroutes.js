@@ -8,6 +8,7 @@ router.get('/gettodaysincome',incomecontroller.getTodayIncome);
 
 router.put('/updateincome/:id',incomecontroller.updateIncomeData);
 router.get('/deleteincome/:_id',incomecontroller.deleteIncomeData);
+router.get('/datedincome',incomecontroller.getDatedIncome)
 
 
 

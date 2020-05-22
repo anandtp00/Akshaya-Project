@@ -252,5 +252,29 @@ module.exports = {
                 });
             }
         })
+    },
+    getDatedIncome:(request,response)=>{
+        let dc = new Date(request.body.date);
+        const day = dc.getDate();
+        const mon = dc.getMonth();
+        Income.find((error, results) => {
+            // console.log(results)
+            if (!error) {
+                const datas = results.filter((element) => {
+                    let d = new Date(element.date);
+                    const ed = d.getDate();
+                    const em = d.getMonth();
+                    return day === ed && mon === em
+                });
+                console.log(datas[0].date);
+                return response.status(200).json(datas);
+            }
+            else {
+                return response.status(400).json({
+                    success: 0,
+                    message: "Not added any income yet!"
+                });
+            }
+        });
     }
 }
